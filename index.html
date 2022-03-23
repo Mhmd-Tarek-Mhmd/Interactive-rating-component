@@ -5,6 +5,192 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive rating component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+    />
+    <style>
+      /*
+        Global styles
+      */
+
+      :root {
+        --orange: hsl(25, 97%, 53%);
+        --grey: hsl(216, 12%, 54%);
+        --light-grey: hsl(217, 12%, 63%);
+        --transparent-bg: rgb(255 255 255 / 4%);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Overpass", serif;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: hsl(216, 12%, 8%);
+      }
+
+      /*
+        Component styles
+      */
+
+      .card {
+        width: 327px;
+        height: 360px;
+        border-radius: 24px;
+        will-change: display;
+        padding: 24px 24px 32px;
+        background-color: hsl(213, 19%, 18%);
+      }
+      .card .title {
+        color: white;
+        font-size: 1.6em;
+        font-weight: 400;
+      }
+      .card p {
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--light-grey);
+      }
+      @media (min-width: 768px) {
+        .card {
+          width: 412px;
+          height: 416px;
+          padding: 32px;
+          border-radius: 32px;
+        }
+        .card .title {
+          font-size: 2.1em;
+        }
+        .card p {
+          font-size: 15px;
+        }
+      }
+
+      /* 
+        [1] Rating state
+      */
+
+      .rating .rounded {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background-color: var(--transparent-bg);
+      }
+      .rating .icon {
+        display: flex;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: center;
+      }
+      .rating p {
+        margin: 13px 0 27px;
+      }
+      .rating .btns {
+        display: flex;
+        justify-content: space-between;
+      }
+      .rating button {
+        border: none;
+        outline: none;
+        background: none;
+        transition: background-color 0.3s;
+        will-change: color, background-color;
+      }
+      .rating button[type="button"] {
+        font-weight: bold;
+        color: var(--light-grey);
+      }
+      .rating button[aria-checked="false"]:focus-visible,
+      .rating button[aria-checked="false"]:hover {
+        color: white;
+        cursor: pointer;
+        background-color: var(--light-grey);
+      }
+      .rating button[aria-checked="true"] {
+        color: white;
+        background-color: var(--orange);
+      }
+      .rating button[type="submit"] {
+        width: 100%;
+        height: 45px;
+        color: white;
+        margin-top: 24px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        border-radius: 24px;
+        text-transform: uppercase;
+        background-color: var(--orange);
+      }
+      .rating button[type="submit"]:focus-visible,
+      .rating button[type="submit"]:hover {
+        color: var(--orange);
+        background-color: white;
+      }
+      @media (min-width: 768px) {
+        .rating .icon {
+          width: 48px;
+          height: 48px;
+          margin-bottom: 32px;
+        }
+        .rating p {
+          margin-top: 10px;
+        }
+        .rating button[type="button"] {
+          width: 52px;
+          height: 52px;
+        }
+        .rating button[type="submit"] {
+          margin-top: 32px;
+        }
+      }
+
+      /* 
+        [2] Thank you state
+      */
+
+      .thank {
+        display: none;
+        padding-top: 32px;
+        text-align: center;
+      }
+      .thank img {
+        height: auto;
+        max-width: 100%;
+      }
+      @media (max-width: 767px) {
+        .thank img {
+          width: 144px;
+        }
+      }
+      .thank p:first-of-type {
+        width: 168px;
+        height: 32px;
+        line-height: 35px;
+        border-radius: 18px;
+        color: var(--orange);
+        margin: 18px auto 26px;
+        background-color: var(--transparent-bg);
+      }
+      .thank p:last-of-type {
+        margin-top: 12px;
+      }
+      @media (min-width: 768px) {
+        .thank {
+          padding: 45px 35px;
+        }
+        .thank p:first-of-type {
+          width: 194px;
+          margin: 26px auto 33px;
+        }
+      }
+    </style>
   </head>
   <body>
     <main>
@@ -13,22 +199,57 @@
       -->
 
       <form class="card rating">
-        <div class="icon" aria-hidden="true">
+        <div class="icon rounded" aria-hidden="true">
           <img src="images/icon-star.svg" alt="" />
         </div>
 
-        <h1>How did we do?</h1>
+        <h1 class="title">How did we do?</h1>
         <p>
           Please let us know how we did with your support request. All feedback
           is appreciated to help us improve our offering!
         </p>
 
         <div class="btns">
-          <button type="button" role="switch" aria-checked="false">1</button>
-          <button type="button" role="switch" aria-checked="false">2</button>
-          <button type="button" role="switch" aria-checked="false">3</button>
-          <button type="button" role="switch" aria-checked="false">4</button>
-          <button type="button" role="switch" aria-checked="false">5</button>
+          <button
+            class="rounded"
+            type="button"
+            role="switch"
+            aria-checked="false"
+          >
+            1
+          </button>
+          <button
+            class="rounded"
+            type="button"
+            role="switch"
+            aria-checked="false"
+          >
+            2
+          </button>
+          <button
+            class="rounded"
+            type="button"
+            role="switch"
+            aria-checked="false"
+          >
+            3
+          </button>
+          <button
+            class="rounded"
+            type="button"
+            role="switch"
+            aria-checked="false"
+          >
+            4
+          </button>
+          <button
+            class="rounded"
+            type="button"
+            role="switch"
+            aria-checked="false"
+          >
+            5
+          </button>
         </div>
 
         <button type="submit">Submit</button>
@@ -41,7 +262,7 @@
       <div class="card thank">
         <img src="images/illustration-thank-you.svg" alt="" />
         <p>You selected <span></span> out of 5</p>
-        <h2>Thank you!</h2>
+        <h2 class="title">Thank you!</h2>
         <p>
           We appreciate you taking the time to give a rating. If you ever need
           more support, don’t hesitate to get in touch!
