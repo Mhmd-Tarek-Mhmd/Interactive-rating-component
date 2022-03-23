@@ -259,7 +259,7 @@
         Thank you state
       -->
 
-      <div class="card thank">
+      <article class="card thank">
         <img src="images/illustration-thank-you.svg" alt="" />
         <p>You selected <span></span> out of 5</p>
         <h2 class="title">Thank you!</h2>
@@ -267,7 +267,34 @@
           We appreciate you taking the time to give a rating. If you ever need
           more support, don’t hesitate to get in touch!
         </p>
-      </div>
+      </article>
     </main>
+
+    <script>
+      (function () {
+        const $ = document.querySelector.bind(document);
+        let checked;
+
+        // [1] Handle switchers
+        document.querySelectorAll(".btns button").forEach((ele) =>
+          ele.addEventListener("click", (e) => {
+            checked = e.target;
+            if (checked) checked.ariaChecked = "false";
+            e.target.ariaChecked = "true";
+          })
+        );
+
+        // [2] Handle submit
+        $("form.card").addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          if (checked) {
+            e.target.style.display = "none";
+            e.target.nextElementSibling.style.display = "block";
+            $("article.card p span").innerHTML = checked.innerHTML;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
