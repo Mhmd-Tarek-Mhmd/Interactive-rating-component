@@ -5,7 +5,7 @@ This is a solution to the [Interactive rating component challenge on Frontend Me
 ## Links
 
 - Live Site [URL](https://mhmd-tarek-mhmd.github.io/Interactive-rating-component)
-- Solution [URL](https://www.frontendmentor.io/solutions/Interactive-rating-component)
+- Solution [URL](https://www.frontendmentor.io/solutions/interactive-rating-component-zn_MbeGS5)
 
 ## Screenshots
 
