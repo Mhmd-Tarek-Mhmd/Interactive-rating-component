@@ -46,7 +46,7 @@
         border-radius: 24px;
         will-change: display;
         padding: 24px 24px 32px;
-        background-color: hsl(213, 19%, 18%);
+        background-color: hsl(215, 22%, 15%);
       }
       .card .title {
         color: white;
@@ -66,7 +66,7 @@
           border-radius: 32px;
         }
         .card .title {
-          font-size: 2.1em;
+          font-size: 1.734em;
         }
         .card p {
           font-size: 15px;
@@ -278,9 +278,16 @@
         // [1] Handle switchers
         document.querySelectorAll(".btns button").forEach((ele) =>
           ele.addEventListener("click", (e) => {
-            checked = e.target;
-            if (checked) checked.ariaChecked = "false";
-            e.target.ariaChecked = "true";
+            if (e.target.ariaChecked === "false") {
+              const checkedBtn = $("button[aria-checked='true']");
+              if (checkedBtn) checkedBtn.ariaChecked = "false";
+
+              e.target.ariaChecked = "true";
+              checked = e.target;
+            } else {
+              e.target.ariaChecked = "false";
+              checked = "";
+            }
           })
         );
 
